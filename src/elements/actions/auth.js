@@ -1,6 +1,4 @@
-import config from 'config';
-
-import { list as listRoute } from '../../pages';
+import pages from '../../pages';
 import { authTypes } from './types.js';
 import { setUser, setLoading, resetLoading } from './app.js';
 import { encryptAES } from '../../lib/helpers.js';
@@ -32,17 +30,23 @@ export const resetAuthFailed = () => ({
   type: authTypes.AUTH_RESET_FAILED,
 });
 
+export const resetPage = () => ({
+  type: authTypes.AUTH_RESET_PAGE,
+})
+
 export const logInUser = (credentials, history) => {
   return async (dispatch) => {
     const cookies = document.cookie;
-    const apiHost = config.get('api.host');
-    const path = `${apiHost}/users/auth`;
+    const apiHost = process.env.API_HOST;
+    const apiPort = process.env.API_PORT;
+    const path = `${apiHost}:${apiPort}/users/auth`;
     const body = encryptAES(JSON.stringify(credentials));
     const options = {
       method: 'POST',
       credentials: 'include',
       headers: {
-        'Content-Type': 'text/plain',
+        'Content-Type': 'text/plain', // FIND OUT WHY COOKIES ARE SET BUT THE ERROR EXISTS
+        'Access-Control-Allow-Origin': `${apiHost}:${apiPort}`,
         'Cookie': cookies
       },
       body,
@@ -50,18 +54,20 @@ export const logInUser = (credentials, history) => {
 
     dispatch(setLoading());
 
-    const response = await fetch(path, options);
+    const response = await fetch(path, options).catch(console.error);
     const { status, ok } = response;
-    const data = await response.json();
 
-    dispatch(resetLoading());
+    if (ok) {
+      const data = await response.json();
 
-    if (status === 403) {
-      dispatch(setAuthFailed());
-    } else if (ok) {
       dispatch(setUser(data));
+      dispatch(resetPage());
+
+      history.replace(pages.list.path);
+    } else if (status === 403) {
+      dispatch(setAuthFailed());
     }
 
-    history.replace(listRoute.path);
-  }
+    dispatch(resetLoading());
+  };
 };

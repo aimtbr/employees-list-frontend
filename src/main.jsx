@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import React from 'react';
 import { render } from 'react-dom';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -12,9 +13,11 @@ import pages from './pages';
 import { PrivateRoute } from './elements/containers/PrivateRoute.js';
 import { store, persistor } from './store.js';
 
+import './main.css';
+
 
 render(
-  <Provider store={store}>
+  (<Provider store={store}>
     <PersistGate persistor={persistor}>
       <Router>
         <Switch>
@@ -30,8 +33,12 @@ render(
           <Route path={pages.signUp.path}>
             {pages.signUp.component}
           </Route>
+          <Route path={pages.notFound.path}>
+            {pages.notFound.component}
+          </Route>
         </Switch>
       </Router>
     </PersistGate>
-  </Provider>
+  </Provider>),
+  document.getElementById('root')
 );

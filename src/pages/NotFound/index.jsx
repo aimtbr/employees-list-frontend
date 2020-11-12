@@ -1,3 +1,5 @@
+import React from 'react';
+
 const NotFound = () => {
   return (
     <h1 id="not-found-message">

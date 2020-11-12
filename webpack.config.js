@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -10,6 +11,9 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: './public/index.html'
   }),
+  new Dotenv({
+    safe: true
+  })
 ];
 
 if (isProduction) {
@@ -26,15 +30,18 @@ module.exports = [
       filename: 'client.js',
       publicPath: './',
     },
+    node: {
+      fs: 'empty',
+    },
     devServer: {
       contentBase: path.resolve(__dirname, 'src'),
       host: 'localhost',
-      port: 3000,
+      port: 3001,
       hot: true,
       historyApiFallback: true,
     },
     resolve: {
-      extensions: ['*', '.js', '.jsx', '.json', '.css'],
+      extensions: ['*', '.js', '.jsx', '.json', '.css']
     },
     plugins,
     module: {
@@ -71,8 +78,8 @@ module.exports = [
         {
           test: /\.html$/,
           use: ['html-loader'],
-        },
+        }
       ],
-    },
+    }
   }
 ];

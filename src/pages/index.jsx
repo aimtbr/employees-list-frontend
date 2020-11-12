@@ -1,3 +1,6 @@
+import React from 'react';
+
+import Home from './Home';
 import Auth from './Auth';
 import SignUp from './SignUp';
 import List from './List';
@@ -7,23 +10,23 @@ import NotFound from './NotFound';
 const pages = {
   home: {
     path: '/',
-    component: Home,
+    component: <Home />,
   },
   auth: {
     path: '/auth',
-    component: Auth,
+    component: <Auth />,
   },
   list: {
     path: '/list',
-    component: List,
+    component: <List />,
   },
   signUp: {
     path: '/signup',
-    component: SignUp,
+    component: <SignUp />,
   },
   notFound: {
     path: '*',
-    component: NotFound,
+    component: <NotFound />,
   }
 };
 

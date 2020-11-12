@@ -7,5 +7,10 @@ html, body {
 }
 
 .invalid-field {
+  display: none;
   color: red;
+}
+
+.shown {
+  display: block;
 }
