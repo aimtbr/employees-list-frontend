@@ -1,0 +1,54 @@
+#employees-list-wrapper {
+  overflow-x: auto;
+}
+
+#employees-list {
+  margin: auto;
+  width: 70vw;
+  table-layout: auto;
+}
+
+#employees-list input, select {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+}
+
+#employees-list-headers {
+  background: #333; 
+  color: black; 
+}
+
+#employees-list-headers th, #employees-list td {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+}
+
+#employees-list td {
+  text-align: left;
+}
+
+#employees-list tr {
+  background-color: #ddd;
+}
+
+#employees-list tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+
+.row-select-position select, .row-select-gender select {
+  cursor: pointer;
+}
+
+.row-date-added {
+  text-align: center!important;
+}
+
+.row-checkbox-input input {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
