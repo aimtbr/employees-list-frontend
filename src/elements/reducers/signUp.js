@@ -11,7 +11,8 @@ const initialState = {
     invalid: false,
   },
   password: {
-    value: ''
+    value: '',
+    invalid: false,
   },
 };
 
@@ -32,28 +33,15 @@ const signUpReducer = (state = initialState, action) => {
 
     case signUpTypes.SIGNUP_SET_FIELDS_INVALID: {
       const { fields } = action;
-      const allowedFields = ['email', 'login'];
+      const allowedFields = ['email', 'login', 'password'];
       const modifiedFields = {};
 
-      fields.forEach((field) => {
-        if (allowedFields.includes(field)) {
-          const { fieldObject } = state[field];
+      allowedFields.forEach((field) => {
+        const fieldObject = state[field];
+
+        if (fields.includes(field)) {
           modifiedFields[field] = { ...fieldObject, value: '', invalid: true };
-        }
-      });
-
-      return { ...state, ...modifiedFields };
-    }
-
-    case signUpTypes.SIGNUP_RESET_FIELDS_INVALID: {
-      const { fields } = action;
-      const allowedFields = ['email', 'login'];
-      const modifiedFields = {};
-
-      fields.forEach((field) => {
-        if (allowedFields.includes(field)) {
-          const { fieldObject } = state[field];
-
+        } else {
           modifiedFields[field] = { ...fieldObject, invalid: false };
         }
       });

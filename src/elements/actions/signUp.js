@@ -27,51 +27,52 @@ export const setInvalidFields = (fields) => ({
   fields,
 });
 
-export const resetInvalidFields = (fields) => ({
-  type: signUpTypes.SIGNUP_RESET_FIELDS_INVALID,
-  fields,
-});
-
 export const resetPage = () => ({
   type: signUpTypes.SIGNUP_RESET_PAGE,
 });
 
 export const signUpUser = (credentials, history) => {
   return async (dispatch) => {
-    const apiHost = process.env.API_HOST;
-    const apiPort = process.env.API_PORT;
-    const cookies = document.cookie;
-    const path = `${apiHost}:${apiPort}/users/signup`;
-    const body = encryptAES(JSON.stringify(credentials));
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'text/plain',
-        'Cookie': cookies
-      },
-      body,
-    };
+    try {
+      const apiHost = process.env.API_HOST;
+      const apiPort = process.env.API_PORT;
+      const path = `${apiHost}:${apiPort}/users/signup`;
+      const body = encryptAES(JSON.stringify(credentials));
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body,
+      };
 
-    dispatch(setLoading());
+      dispatch(setLoading());
 
-    const response = await fetch(path, options).catch(console.error);
-    const { status, ok } = response;
+      const response = await fetch(path, options);
+      const { status, ok } = response;
 
-    if (ok) {
-      dispatch(resetPage());
+      if (ok) {
+        dispatch(resetPage());
 
-      alert('The user has been successfully created!');
+        alert('The user has been successfully created!');
 
-      history.replace(pages.auth.path);
-    } else if (status === 403) {
-      const data = await response.json();
-      const { props: propsAlreadyInUse } = data;
+        history.replace(pages.auth.path);
+      } else {
+        const data = await response.json();
 
-      dispatch(setInvalidFields(propsAlreadyInUse));
-    } else {
-      console.error('Something went wrong while creating a user account!');
+        if (status === 403) {
+          const { props: invalidProps } = data;
+
+          dispatch(setInvalidFields(invalidProps));
+        } else {
+          throw new Error(data.error);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong while creating a user account!');
+    } finally {
+      dispatch(resetLoading());
     }
-
-    dispatch(resetLoading());
   };
 };

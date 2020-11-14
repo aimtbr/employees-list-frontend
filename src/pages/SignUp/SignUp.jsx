@@ -8,7 +8,7 @@ import {
   MAX_LOGIN_LENGTH,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
-  DEFAULT_TEXT_INPUT_SIZE,
+  DEFAULT_FORM_INPUT_SIZE,
 } from '../../lib/constants.js';
 
 import pages from '..';
@@ -19,7 +19,7 @@ const SignUp = (props) => {
     user,
     email: { value: email, invalid: isEmailInvalid },
     login: { value: login, invalid: isLoginInvalid },
-    password: { value: password },
+    password: { value: password, invalid: isPasswordInvalid},
     updateEmail,
     updateLogin,
     updatePassword,
@@ -34,8 +34,8 @@ const SignUp = (props) => {
       Email:
       <input
         className="form-input"
-        type="text"
-        size={DEFAULT_TEXT_INPUT_SIZE}
+        type="email"
+        size={DEFAULT_FORM_INPUT_SIZE}
         maxLength={MAX_EMAIL_LENGTH}
         pattern={emailPattern}
         onChange={(event) => updateEmail(event.target.value)}
@@ -53,7 +53,7 @@ const SignUp = (props) => {
       <input
         className="form-input"
         type="text"
-        size={DEFAULT_TEXT_INPUT_SIZE}
+        size={DEFAULT_FORM_INPUT_SIZE}
         maxLength={MAX_LOGIN_LENGTH}
         onChange={(event) => updateLogin(event.target.value)}
         autoComplete="username"
@@ -70,7 +70,7 @@ const SignUp = (props) => {
       <input
         className="form-input"
         type="password"
-        size={DEFAULT_TEXT_INPUT_SIZE}
+        size={DEFAULT_FORM_INPUT_SIZE}
         minLength={MIN_PASSWORD_LENGTH}
         maxLength={MAX_PASSWORD_LENGTH}
         onChange={(event) => updatePassword(event.target.value)}
@@ -79,6 +79,9 @@ const SignUp = (props) => {
         required
       />
     </label>
+    <div className={'invalid-field' + (isPasswordInvalid ? ' shown' : '')}>
+      Invalid password
+    </div>
 
     <button
       className="signup-btn"
@@ -87,6 +90,14 @@ const SignUp = (props) => {
 
         signUpUser({ email, login, password }, history);
       }}>Sign up</button>
+    
+    <button
+      id="go-back-btn"
+      onClick={(event) => {
+        event.preventDefault();
+
+        history.goBack();
+      }}>Back</button>
   </div>;
 
   return (

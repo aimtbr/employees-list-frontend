@@ -10,7 +10,7 @@ import {
   MAX_LOGIN_LENGTH,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
-  DEFAULT_TEXT_INPUT_SIZE,
+  DEFAULT_FORM_INPUT_SIZE,
 } from '../../lib/constants.js';
 
 import './styles.css';
@@ -38,7 +38,7 @@ const Auth = (props) => {
     <input
       className="form-input"
       type="text"
-      size={DEFAULT_TEXT_INPUT_SIZE}
+      size={DEFAULT_FORM_INPUT_SIZE}
       maxLength={MAX_LOGIN_LENGTH}
       onChange={(event) => updateLogin(event.target.value)}
       value={login}
@@ -50,7 +50,7 @@ const Auth = (props) => {
     <input
       className="form-input"
       type="password"
-      size={DEFAULT_TEXT_INPUT_SIZE}
+      size={DEFAULT_FORM_INPUT_SIZE}
       minLength={MIN_PASSWORD_LENGTH}
       maxLength={MAX_PASSWORD_LENGTH}
       onChange={(event) => updatePassword(event.target.value)}

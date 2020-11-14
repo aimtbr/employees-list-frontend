@@ -36,38 +36,39 @@ export const resetPage = () => ({
 
 export const logInUser = (credentials, history) => {
   return async (dispatch) => {
-    const cookies = document.cookie;
-    const apiHost = process.env.API_HOST;
-    const apiPort = process.env.API_PORT;
-    const path = `${apiHost}:${apiPort}/users/auth`;
-    const body = encryptAES(JSON.stringify(credentials));
-    const options = {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'text/plain', // FIND OUT WHY COOKIES ARE SET BUT THE ERROR EXISTS
-        'Access-Control-Allow-Origin': `${apiHost}:${apiPort}`,
-        'Cookie': cookies
-      },
-      body,
-    };
+    try {
+      const apiHost = process.env.API_HOST;
+      const apiPort = process.env.API_PORT;
+      const path = `${apiHost}:${apiPort}/users/auth`;
+      const body = encryptAES(JSON.stringify(credentials));
+      const options = {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body,
+      };
 
-    dispatch(setLoading());
+      dispatch(setLoading());
 
-    const response = await fetch(path, options).catch(console.error);
-    const { status, ok } = response;
+      const response = await fetch(path, options).catch(console.error);
+      const { status, ok } = response;
 
-    if (ok) {
-      const data = await response.json();
+      if (ok) {
+        const data = await response.json();
 
-      dispatch(setUser(data));
-      dispatch(resetPage());
+        dispatch(setUser(data));
+        dispatch(resetPage());
 
-      history.replace(pages.list.path);
-    } else if (status === 403) {
-      dispatch(setAuthFailed());
+        history.replace(pages.list.path);
+      } else if (status === 403) {
+        dispatch(setAuthFailed());
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch(resetLoading());
     }
-
-    dispatch(resetLoading());
   };
 };

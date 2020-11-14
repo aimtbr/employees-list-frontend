@@ -12,6 +12,7 @@ const mapDispatchToProps = (dispatch) => ({
   resetUser: () => dispatch(resetUser()),
 });
 
-const PrivateRoute = connect(mapStateToProps, mapDispatchToProps)(PrivateRouteComponent);
-
-export { PrivateRoute };
+export const PrivateRoute = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrivateRouteComponent);
