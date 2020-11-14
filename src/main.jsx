@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 
 import pages from './pages';
+import { Loader } from './elements/containers/Loader.js';
 import { PrivateRoute } from './elements/containers/PrivateRoute.js';
 import { store, persistor } from './store.js';
 
@@ -20,6 +21,7 @@ render(
   (<Provider store={store}>
     <PersistGate persistor={persistor}>
       <Router>
+        <Loader />
         <Switch>
           <Route exact path={pages.home.path}>
             {pages.home.component}
