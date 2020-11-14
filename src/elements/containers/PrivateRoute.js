@@ -1,10 +1,17 @@
 import { connect } from 'react-redux';
 
+import { resetUser } from '../actions/app.js';
 import PrivateRouteComponent from '../components/PrivateRoute.jsx';
 
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: state.app.user,
 });
 
-export const PrivateRoute = connect(mapStateToProps)(PrivateRouteComponent);
+const mapDispatchToProps = (dispatch) => ({
+  resetUser: () => dispatch(resetUser()),
+});
+
+const PrivateRoute = connect(mapStateToProps, mapDispatchToProps)(PrivateRouteComponent);
+
+export { PrivateRoute };

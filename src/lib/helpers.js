@@ -1,12 +1,11 @@
-import config from 'config';
 import crypto from 'crypto-js';
 
 
-const salt = config.get('saltAES');
+const salt = process.env.AES_SALT;
 
 export const getCookie = (cookieName) => {
   const allCookies = document.cookie;
-
+  console.log(allCookies);
   if (allCookies === '') {
     return allCookies;
   }

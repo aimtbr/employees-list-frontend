@@ -1,17 +1,28 @@
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { auth as authRoute } from '../../pages';
+import pages from '../../pages';
 
 
 const PrivateRoute = (props) => {
-  const { user, children, ...rest } = props;
+  const {
+    user,
+    resetUser, // TODO: REMOVE
+    children,
+    ...rest
+  } = props;
+
+  const isAuthorized = user !== null;
+  // resetUser();
 
   return (
     <Route
       {...rest}
-      render={() => (user === null
-        ? <Redirect to={authRoute.path} />
-        : children)}
+      render={
+        () => (isAuthorized
+          ? children
+          : <Redirect to={pages.auth.path} />)
+      }
     />
   );
 };

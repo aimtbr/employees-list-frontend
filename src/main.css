@@ -1,0 +1,16 @@
+html, body {
+
+}
+
+.form-input {
+  
+}
+
+.invalid-field {
+  display: none;
+  color: red;
+}
+
+.shown {
+  display: block;
+}

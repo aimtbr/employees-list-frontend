@@ -33,6 +33,10 @@ const authReducer = (state = initialState, action) => {
       return { ...state, isFailed: false };
     }
 
+    case authTypes.AUTH_RESET_PAGE: {
+      return initialState;
+    }
+
     default: {
       return state;
     }
