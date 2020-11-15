@@ -12,16 +12,28 @@ const List = (props) => {
   const {
     rows,
     user,
+    search,
     selected,
+    location,
     getList,
     logOutUser,
     addRow,
     deleteRow,
+    updateSearch,
+    updateSearchQuery,
+    formatSearchQuery
   } = props;
 
+  const searchQuery = location.search;
+  const isSearchQueryValid = searchQuery === '' || searchQuery.startsWith('?search=');
+  const formattedSearchQuery = formatSearchQuery(searchQuery);
+
   useEffect(() => {
-    getList();
-  }, []);
+    if (isSearchQueryValid) {
+      getList(searchQuery);
+      updateSearch(formattedSearchQuery);
+    }
+  }, [searchQuery]);
 
   const isUserProfileHidden = user === null ? 'hidden' : '';
   const shownWhenSelected = selected === '' ? 'hidden' : '';
@@ -34,6 +46,12 @@ const List = (props) => {
         size="10"
         placeholder="Search"
         id="search-input"
+        onChange={(event) => {
+          const { value } = event.target;
+          updateSearchQuery(value);
+          updateSearch(value);
+        }}
+        value={search}
       />
 
       <button

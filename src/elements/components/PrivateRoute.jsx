@@ -7,20 +7,18 @@ import pages from '../../pages';
 const PrivateRoute = (props) => {
   const {
     user,
-    resetUser, // TODO: REMOVE
-    children,
+    component,
     ...rest
   } = props;
 
   const isAuthorized = user !== null;
-  // resetUser();
 
   return (
     <Route
       {...rest}
       render={
-        () => (isAuthorized
-          ? children
+        (routeProps) => (isAuthorized
+          ? component(routeProps)
           : <Redirect to={pages.auth.path} />)
       }
     />

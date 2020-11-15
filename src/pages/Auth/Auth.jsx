@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  useHistory,
   Redirect,
   Link,
 } from 'react-router-dom';
@@ -21,13 +20,12 @@ const Auth = (props) => {
     user,
     login,
     password,
+    history,
     updateLogin,
     updatePassword,
     logInUser,
     isFailed,
   } = props;
-
-  const history = useHistory();
 
   const body = (<div>
     <div

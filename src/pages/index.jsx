@@ -14,15 +14,15 @@ const pages = {
   },
   auth: {
     path: '/auth',
-    component: <Auth />,
+    component: (props) => <Auth {...props} />,
   },
   list: {
     path: '/list',
-    component: <List />,
+    component: (props) => <List {...props} />,
   },
   signUp: {
     path: '/signup',
-    component: <SignUp />,
+    component: (props) => <SignUp {...props} />,
   },
   notFound: {
     path: '*',

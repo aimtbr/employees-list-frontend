@@ -32,10 +32,10 @@ const TableRow = (props) => {
   const isRowSelected = selected === id;
 
   const genderOptions = GENDERS_ENUM.map((genderValue) => (
-    <option value={genderValue}>{genderValue}</option>
+    <option key={genderValue} value={genderValue}>{genderValue}</option>
   ));
   const positionOptions = POSITIONS_ENUM.map((positionValue) => (
-    <option value={positionValue}>{positionValue}</option>
+    <option key={positionValue} value={positionValue}>{positionValue}</option>
   ));
 
   const localeTime = dateAdded.toLocaleTimeString();
@@ -142,7 +142,7 @@ const TableRow = (props) => {
   });
 
   return (
-    <tr id={id}>
+    <tr key={id} id={id}>
       {cells}
     </tr>
   );

@@ -35,6 +35,11 @@ export const updateCellState = (data) => ({
   data,
 });
 
+export const updateSearch = (search) => ({
+  type: listTypes.LIST_UPDATE_SEARCH,
+  search,
+});
+
 export const addRow = () => {
   return async (dispatch) => {
     try {
@@ -65,12 +70,16 @@ export const addRow = () => {
 };
 
 export const updateCell = (data) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    const prevRowsState = getState().list.rows;
+
     try {
       const { id, field, value } = data;
       const { cookie } = document;
+
       const path = `${apiHost}:${apiPort}/api/employee/${id}`;
-      const changes = { [field]: value };
+      const preparedValue = value.toString().trim();
+      const changes = { [field]: preparedValue };
       const body = JSON.stringify(changes);
       const options = {
         method: 'PATCH',
@@ -82,31 +91,31 @@ export const updateCell = (data) => {
         body
       };
 
-      const response = await fetch(path, options);
-      const { ok } = response;
+      dispatch(updateCellState(data));
 
-      if (ok) {
-        dispatch(updateCellState(data));
-      } else {
+      const response = await fetch(path, options);
+      const { statusText, ok } = response;
+
+      if (!ok) {
         const { error } = await response.json();
-        throw new Error(error);
+        throw new Error(error || statusText);
       }
     } catch (error) {
       console.error(error);
       alert('Something went wrong while updating a cell');
+
+      dispatch(setRows(prevRowsState));
     }
   };
 };
 
 export const deleteRow = (id) => {
   return async (dispatch, getState) => {
-    try {
-      if (!id) {
-        throw new Error('Incorrect row ID has been passed.');
-      }
+    // store the rows before them gets updated, to be able to get back to it
+    const prevRowsState = getState().list.rows;
 
-      const { cookie } = document;
-      const { list: rows } = getState();
+    try {
+      const { cookie } = document; // get the document cookie in order to send on the server
       const path = `${apiHost}:${apiPort}/api/employee/${id}`;
       const options = {
         method: 'DELETE',
@@ -116,31 +125,35 @@ export const deleteRow = (id) => {
         },
       };
 
+      // update the store
       dispatch(deleteRowState(id));
 
       const response = await fetch(path, options);
       const { ok } = response;
 
+      // redirect an error from response to the catch block
       if (!ok) {
-        dispatch(setRows(rows)); // back the previous rows state
-
         const { error } = await response.json();
         throw new Error(error);
       }
     } catch (error) {
       console.error(error);
+      // notify a user (TODO: replace with a notifications module)
       alert('Something went wrong while deleting a row!');
+
+      dispatch(setRows(prevRowsState)); // return the previous rows state
     } finally {
+      // reset the selected row despite of deleted it or not
       dispatch(resetSelected());
     }
   };
 };
 
-export const getList = () => {
+export const getList = (searchQuery = '') => {
   return async (dispatch) => {
     try {
       const { cookie } = document;
-      const path = `${apiHost}:${apiPort}/api/employees`;
+      const path = `${apiHost}:${apiPort}/api/employees${searchQuery}`;
       const options = {
         method: 'GET',
         credentials: 'include',
@@ -152,7 +165,7 @@ export const getList = () => {
       dispatch(setLoading());
 
       const response = await fetch(path, options);
-      const { ok } = response;
+      const { statusText, ok } = response;
       const data = await response.json();
 
       if (ok) {
@@ -164,7 +177,7 @@ export const getList = () => {
 
         dispatch(setRows(rows));
       } else {
-        throw new Error(data.error);
+        throw new Error(data.error || statusText);
       }
     } catch (error) {
       console.error(error);

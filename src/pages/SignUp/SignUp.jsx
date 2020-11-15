@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 import {
@@ -19,7 +19,8 @@ const SignUp = (props) => {
     user,
     email: { value: email, invalid: isEmailInvalid },
     login: { value: login, invalid: isLoginInvalid },
-    password: { value: password, invalid: isPasswordInvalid},
+    password: { value: password, invalid: isPasswordInvalid },
+    history,
     updateEmail,
     updateLogin,
     updatePassword,
@@ -27,7 +28,6 @@ const SignUp = (props) => {
   } = props;
 
   const isAuthorized = user !== null;
-  const history = useHistory();
 
   const body = <div>
     <label className="pre-field-label">
@@ -90,14 +90,12 @@ const SignUp = (props) => {
 
         signUpUser({ email, login, password }, history);
       }}>Sign up</button>
-    
+
     <button
       id="go-back-btn"
-      onClick={(event) => {
-        event.preventDefault();
-
-        history.goBack();
-      }}>Back</button>
+      type="button"
+      onClick={() => history.replace(pages.auth.path)}
+    >Back</button>
   </div>;
 
   return (

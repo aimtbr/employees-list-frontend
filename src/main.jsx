@@ -26,15 +26,22 @@ render(
           <Route exact path={pages.home.path}>
             {pages.home.component}
           </Route>
-          <Route path={pages.auth.path}>
-            {pages.auth.component}
-          </Route>
-          <PrivateRoute path={pages.list.path}>
-            {pages.list.component}
-          </PrivateRoute>
-          <Route path={pages.signUp.path}>
-            {pages.signUp.component}
-          </Route>
+
+          <Route
+            path={pages.auth.path}
+            render={pages.auth.component}
+          />
+
+          <PrivateRoute
+            path={pages.list.path}
+            component={pages.list.component}
+          />
+
+          <Route
+            path={pages.signUp.path}
+            render={pages.signUp.component}
+          />
+
           <Route path={pages.notFound.path}>
             {pages.notFound.component}
           </Route>

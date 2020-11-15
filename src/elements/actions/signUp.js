@@ -49,7 +49,7 @@ export const signUpUser = (credentials, history) => {
       dispatch(setLoading());
 
       const response = await fetch(path, options);
-      const { status, ok } = response;
+      const { status, statusText, ok } = response;
 
       if (ok) {
         dispatch(resetPage());
@@ -65,7 +65,7 @@ export const signUpUser = (credentials, history) => {
 
           dispatch(setInvalidFields(invalidProps));
         } else {
-          throw new Error(data.error);
+          throw new Error(statusText);
         }
       }
     } catch (error) {

@@ -4,6 +4,7 @@ import { listTypes } from '../actions/types.js';
 
 const initialState = {
   selected: '',
+  search: '',
   rows: [],
 };
 
@@ -61,6 +62,10 @@ const listReducer = (state = initialState, action) => {
       }, []);
 
       return { ...state, rows };
+    }
+
+    case listTypes.LIST_UPDATE_SEARCH: {
+      return { ...state, search: action.search };
     }
 
     default: {
