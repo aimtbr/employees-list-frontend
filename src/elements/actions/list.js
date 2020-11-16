@@ -125,6 +125,11 @@ export const deleteRow = (id) => {
         },
       };
 
+      const isDeletionApproved = confirm('Delete the selected row?');
+
+      if (!isDeletionApproved) {
+        return null;
+      }
       // update the store
       dispatch(deleteRowState(id));
 
