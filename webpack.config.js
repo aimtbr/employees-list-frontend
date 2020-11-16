@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const port = process.env.PORT || 3001;
+const host = process.env.HOST || 'localhost';
 const mode = isProduction ? 'production' : 'development';
 const devtool = isProduction ? false : 'inline-source-map';
 
@@ -35,8 +37,8 @@ module.exports = [
     },
     devServer: {
       contentBase: path.resolve(__dirname, 'src'),
-      host: 'localhost',
-      port: 3001,
+      host,
+      port,
       hot: true,
       historyApiFallback: true,
     },
