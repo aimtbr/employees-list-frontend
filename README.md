@@ -5,7 +5,7 @@
 
 ## How to run
 ### Shortcut
-`git clone https://github.com/aimtbr/employees-list-frontend.git && cd employees-list-frontend && npm i && npm run dev`
+`git clone https://github.com/aimtbr/employees-list-frontend.git && cd employees-list-frontend && npm i`
 ### Steps
 1. `git clone https://github.com/aimtbr/employees-list-frontend.git`
 1. `cd employees-list-frontend`
