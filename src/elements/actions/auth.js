@@ -52,8 +52,8 @@ export const logInUser = (credentials, history) => {
 
       dispatch(setLoading());
 
-      const response = await fetch(path, options).catch(console.error);
-      const { status, ok } = response;
+      const response = await fetch(path, options);
+      const { status, statusText, ok } = response;
 
       if (ok) {
         const data = await response.json();
@@ -64,9 +64,12 @@ export const logInUser = (credentials, history) => {
         history.replace(pages.list.path);
       } else if (status === 403) {
         dispatch(setAuthFailed());
+      } else {
+        throw new Error(statusText);
       }
     } catch (error) {
       console.error(error);
+      alert('Something went wrong while trying to log in!');
     } finally {
       dispatch(resetLoading());
     }
