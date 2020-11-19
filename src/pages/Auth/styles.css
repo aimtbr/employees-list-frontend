@@ -1,0 +1,19 @@
+#auth {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+#auth-failed {
+  height: 1rem;
+}
+
+#auth-buttons {
+  margin-bottom: 4rem;
+}
+
+.form-input-wrapper {
+  margin-bottom: 1.5rem;
+}

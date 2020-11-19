@@ -1,16 +1,77 @@
-html, body {
-
+html, body, #root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #a9cdd3;
+  font-family: Arial, sans-serif;
 }
 
-.form-input {
-  
+input[type="password"] {
+  font-size: 1.7rem;
+}
+
+input[type="password"]::placeholder {
+  font-size: 1rem;
+  position: relative;
+  bottom: 0.2rem;
+}
+
+#page-title {
+  margin-bottom: 3rem;
 }
 
 .invalid-field {
   display: none;
-  color: red;
+  color: #eb1515;
+  font-weight: bold;
+  margin: 0.5rem;
 }
 
 .shown {
-  display: block;
+  display: initial;
+}
+
+#loader {
+  position: absolute;
+  left: 48vw;
+  top: 40vh;
+  height: 2.5rem;
+}
+
+.form-input {
+  outline: none;
+  height: 2.3rem;
+  border-radius: 5px;
+  border: 2px solid #535353;
+  width: 16rem;
+  font-size: 1rem;
+  padding: 0 1rem;
+}
+
+.default-button {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  border: 1px solid black;
+  border-radius: 3px;
+  background: linear-gradient(to top, #6da6ce, #347aad);
+  cursor: pointer;
+  outline: none;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.default-button:hover {
+  background: none;
+  background-color: #98bcd3;
+  transition: background-color .4s ease-in-out;
+}
+
+.default-button:active {
+  transition: none;
+  background-color: #6c93a3;
 }

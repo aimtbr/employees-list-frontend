@@ -1,0 +1,77 @@
+#signup {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#signup-form {
+  max-width: 87%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 31rem;
+}
+
+#signup-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  width: 35%;
+  justify-content: center;
+}
+
+#create-account-btn {
+  flex: 1 0 50%;
+  max-width: 11rem;
+}
+
+#back-btn {
+  flex: 1 0 40%;
+  max-width: 5rem;
+}
+
+.signup-form-group-wrapper {
+  flex: 1 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.signup-form-group {
+  flex: 1 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.prefield-label {
+  font-size: 1.2rem;
+  flex: 1 0 20%;
+  max-width: 9rem;
+}
+
+.signup-form-group > .form-input {
+  flex: 1 0 50%;
+  max-width: 18rem;
+}
+
+.signup-form-group-wrapper > .invalid-field {
+  flex: 1 0 100%;
+  text-align: center;
+  margin-bottom: -1rem;
+}
+
+#create-account-btn {
+  background: linear-gradient(to top, #68c990, #1b944d);
+}
+
+#create-account-btn:hover {
+  background: none;
+  background-color: #8acca6;
+  transition: background-color .4s ease-in-out;
+}
+
+#create-account-btn:active {
+  transition: none;
+  background-color: #6c93a3;
+}
