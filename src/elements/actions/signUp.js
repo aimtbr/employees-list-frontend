@@ -4,24 +4,6 @@ import { encryptAES } from '../../lib/helpers.js';
 import { setLoading, resetLoading } from './app.js';
 
 
-export const updateEmail = (value) => ({
-  type: signUpTypes.SIGNUP_SET_FIELD_VALUE,
-  field: 'email',
-  value,
-});
-
-export const updateLogin = (value) => ({
-  type: signUpTypes.SIGNUP_SET_FIELD_VALUE,
-  field: 'login',
-  value,
-});
-
-export const updatePassword = (value) => ({
-  type: signUpTypes.SIGNUP_SET_FIELD_VALUE,
-  field: 'password',
-  value,
-});
-
 export const setInvalidFields = (fields) => ({
   type: signUpTypes.SIGNUP_SET_FIELDS_INVALID,
   fields,
@@ -30,6 +12,26 @@ export const setInvalidFields = (fields) => ({
 export const resetPage = () => ({
   type: signUpTypes.SIGNUP_RESET_PAGE,
 });
+
+const updateField = (field) => {
+  return (value) => {
+    return (dispatch) => {
+      dispatch(setInvalidFields([]));
+
+      dispatch({
+        type: signUpTypes.SIGNUP_SET_FIELD_VALUE,
+        field,
+        value,
+      });
+    };
+  };
+};
+
+export const updateEmail = updateField('email');
+
+export const updateLogin = updateField('login');
+
+export const updatePassword = updateField('password');
 
 export const signUpUser = (credentials, history) => {
   return async (dispatch) => {
