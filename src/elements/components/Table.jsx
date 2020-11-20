@@ -17,16 +17,14 @@ const Table = (props) => {
   );
 
   return (
-    <div id="employees-list-wrapper">
-      <table id="employees-list">
-        <thead>
-          <TableHeaders headers={headers} />
-        </thead>
-        <tbody>
-          {setRows}
-        </tbody>
-      </table>
-    </div>
+    <table id="table">
+      <thead>
+        <TableHeaders headers={headers} />
+      </thead>
+      <tbody>
+        {setRows}
+      </tbody>
+    </table>
   );
 };
 

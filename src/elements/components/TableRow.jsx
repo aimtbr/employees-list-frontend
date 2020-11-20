@@ -142,7 +142,7 @@ const TableRow = (props) => {
   });
 
   return (
-    <tr key={id} id={id}>
+    <tr key={id} className="table-row">
       {cells}
     </tr>
   );

@@ -1,39 +1,100 @@
-#employees-list-wrapper {
-  overflow-x: auto;
+#list {
+  height: 100vh;
 }
 
-#employees-list {
+#table-wrapper {
+  overflow: auto;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 68rem;
+  max-width: 75%;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+#table {
   margin: auto;
-  width: 70vw;
-  table-layout: auto;
+  width: 100%;
 }
 
-#employees-list input, select {
+#table input, select {
   border: none;
   background-color: transparent;
   width: 100%;
   outline: none;
 }
 
-#employees-list-headers {
+#table-head {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#table-head button > img {
+  height: 1.3rem;
+  vertical-align: middle;
+}
+
+#search-input {
+  flex: 1 0 30%;
+  max-width: 12rem;
+}
+
+#add-row-btn {
+  flex: 1 0 5%;
+  max-width: 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#delete-row-btn {
+  flex: 1 0 5%;
+  max-width: 2rem;
+  padding: 0;
+}
+
+#user-profile {
+  max-width: 45%;
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  margin-left: auto;
+}
+
+#user-profile-email {
+  flex: 1 0 auto;
+  overflow-x: hidden;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+#log-out-btn {
+  flex: 1 0 auto;
+  width: 2rem;
+  padding: 0;
+  height: 100%;
+}
+
+#table-headers {
   background: #333; 
   color: black; 
 }
 
-#employees-list-headers th, #employees-list td {
+#table-headers th, #table td {
   padding: 0.4rem;
   border: 1px solid #ccc;
 }
 
-#employees-list td {
+#table td {
   text-align: left;
 }
 
-#employees-list tr {
+#table tr {
   background-color: #ddd;
 }
 
-#employees-list tr:nth-of-type(odd) { 
+#table tr:nth-of-type(odd) { 
   background: #eee; 
 }
 
@@ -43,6 +104,7 @@
 
 .row-date-added {
   text-align: center!important;
+  cursor: help;
 }
 
 .row-checkbox-input input {

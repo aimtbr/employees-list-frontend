@@ -11,7 +11,7 @@ export const TableHeaders = (props) => {
   ));
 
   return (
-    <tr id="employees-list-headers">
+    <tr id="table-headers">
       {columns}
     </tr>
   );

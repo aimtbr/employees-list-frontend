@@ -40,50 +40,54 @@ const List = (props) => {
   const userProfileName = user && user.email;
 
   return (
-    <div>
-      <input
-        type="search"
-        size="10"
-        placeholder="Search"
-        id="search-input"
-        onChange={(event) => {
-          const { value } = event.target;
-          updateSearchQuery(value);
-          updateSearch(value);
-        }}
-        value={search}
-      />
+    <div id="list">
+      <div id="table-wrapper">
+        <div id="table-head">
+          <input
+            type="search"
+            size="10"
+            placeholder="Search"
+            id="search-input"
+            onChange={(event) => {
+              const { value } = event.target;
+              updateSearchQuery(value);
+              updateSearch(value);
+            }}
+            value={search}
+          />
 
-      <button
-        type="button"
-        id="add-row-btn"
-        onClick={() => addRow()}
-      >+</button>
+          <button
+            type="button"
+            id="add-row-btn"
+            onClick={() => addRow()}
+          >+</button>
 
-      <button
-        type="button"
-        id="delete-row-btn"
-        className={shownWhenSelected}
-        onClick={() => deleteRow(selected)}
-      >
-        <img src={deleteButton} />
-      </button>
+          <button
+            type="button"
+            id="delete-row-btn"
+            className={shownWhenSelected}
+            onClick={() => deleteRow(selected)}
+          >
+            <img src={deleteButton} />
+          </button>
 
-      <div
-        id="user-profile"
-        className={isUserProfileHidden}
-      >
-        <label>
-          {userProfileName}
-        </label>
-        <button
-          id="log-out-btn"
-          type="button"
-          onClick={() => logOutUser()}
-        ><img src={logOutButton} /></button>
+          <div
+            id="user-profile"
+            className={isUserProfileHidden}
+          >
+            <label id="user-profile-email">
+              {userProfileName}
+            </label>
+            <button
+              id="log-out-btn"
+              type="button"
+              onClick={() => logOutUser()}
+            ><img src={logOutButton} /></button>
+          </div>
+        </div>
+
+        <Table headers={headers} rows={rows} />
       </div>
-
-      <Table headers={headers} rows={rows} />
     </div>
   );
 };
