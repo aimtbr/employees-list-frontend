@@ -15,9 +15,9 @@ export const GENDERS_ENUM = [
   'other'
 ];
 
-export const DEFAULT_POSITION = 'n/n';
+export const DEFAULT_POSITION = 'n/a';
 export const POSITIONS_ENUM = [
-  'n/n',
+  'n/a',
   'Developer',
   'HR',
   'CEO',

@@ -115,6 +115,10 @@ export const deleteRow = (id) => {
     const prevRowsState = getState().list.rows;
 
     try {
+      if (!id) {
+        throw new Error('Select a row to delete!');
+      }
+
       const { cookie } = document; // get the document cookie in order to send on the server
       const path = `${apiHost}:${apiPort}/api/employee/${id}`;
       const options = {

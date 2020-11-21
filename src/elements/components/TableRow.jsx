@@ -122,9 +122,9 @@ const TableRow = (props) => {
     },
     dateAdded: {
       element: (value) => (
-        <span title={localeTime}>
+        <div title={localeTime}>
           {value}
-        </span>
+        </div>
       ),
       className: "row-date-added",
       value: formattedDateAdded,

@@ -30,7 +30,7 @@ export const headers = [
     value: 'Salary (USD)',
   },
   {
-    id: 'header-created-at',
+    id: 'header-date-added',
     key: 'dateAdded',
     value: 'Date added',
   }

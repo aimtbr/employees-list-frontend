@@ -46,7 +46,7 @@ const List = (props) => {
           <input
             type="search"
             size="10"
-            placeholder="Search"
+            placeholder="Search..."
             id="search-input"
             onChange={(event) => {
               const { value } = event.target;
