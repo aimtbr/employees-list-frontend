@@ -1,5 +1,5 @@
 #list {
-  height: 100vh;
+  height: 100%;
 }
 
 #table-wrapper {
@@ -10,19 +10,35 @@
   width: 68rem;
   max-width: 75%;
   margin: 0 auto;
-  margin-top: 4rem;
+  position: relative;
+  top: 15%;
 }
 
 #table {
   margin: auto;
   width: 100%;
+  table-layout: fixed;
+  overflow: auto;
 }
 
-#table input, select {
-  border: none;
-  background-color: transparent;
-  width: 100%;
-  outline: none;
+#table tr {
+  background-color: #ddd;
+}
+
+#table tr:nth-of-type(odd) { 
+  background: #eee; 
+}
+
+#table td:hover {
+  background-color: #e2e2e2;
+}
+
+#table td:focus-within {
+  background-color: #fff;
+}
+
+#table th, #table td {
+  overflow: hidden;
 }
 
 #table-head {
@@ -38,28 +54,73 @@
 
 #search-input {
   flex: 1 0 30%;
-  max-width: 12rem;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 0 0.5rem 0 1rem;
+  color: #575757;
+  outline: none;
+  opacity: 0.9;
+  max-width: 9rem;
+  transition: max-width 0.5s;
 }
 
-#add-row-btn {
+#search-input:focus {
+  max-width: 12rem;
+  transition: max-width 0.5s;
+  opacity: 1;
+}
+
+#add-row-btn, #delete-row-btn {
   flex: 1 0 5%;
   max-width: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 3px;
+  background-color: #b9ddd3;
+  color: #313131;
+  outline: none;
+}
+
+#add-row-btn:hover {
+  background-color: #99e5cf;
+  transition: background-color 0.3s;
+}
+
+#add-row-btn:active {
+  transition: none;
+  background-color: #7db4a2;
 }
 
 #delete-row-btn {
-  flex: 1 0 5%;
-  max-width: 2rem;
   padding: 0;
+  background-color: #e3cece;
+}
+
+#delete-row-btn:hover {
+  background-color: #e9c0c0;
+  transition: background-color 0.3s;
+}
+
+#delete-row-btn:active {
+  transition: none;
+  background-color: #b69a9a;
+}
+
+#delete-row-btn > img {
+  padding-bottom: 0.2rem;
 }
 
 #user-profile {
-  max-width: 45%;
   display: flex;
   align-items: center;
-  border: 1px solid gray;
+  max-width: 45%;
   margin-left: auto;
+  border: 1px solid gray;
+  border-radius: 3px;
+  background-color: #eee;
+  font-size: 0.9rem;
 }
 
 #user-profile-email {
@@ -74,6 +135,15 @@
   width: 2rem;
   padding: 0;
   height: 100%;
+  background: transparent;
+  border: none;
+  border-left: 1px ridge gray;
+  cursor: pointer;
+}
+
+#log-out-btn:hover {
+  background-color: #d5d5d5;
+  transition: background-color 0.3s;
 }
 
 #table-headers {
@@ -81,34 +151,82 @@
   color: black; 
 }
 
-#table-headers th, #table td {
-  padding: 0.4rem;
-  border: 1px solid #ccc;
+#header-checkbox {
+  width: 1rem;
 }
 
-#table td {
-  text-align: left;
+#header-full-name {
+  width: 14rem;
 }
 
-#table tr {
-  background-color: #ddd;
+#header-gender {
+  width: 6rem;
 }
 
-#table tr:nth-of-type(odd) { 
-  background: #eee; 
+#header-contacts {
+  width: 11rem;
+}
+
+#header-position {
+  width: 7rem;
+}
+
+#header-salary {
+  width: 7rem;
+}
+
+#header-date-added {
+  width: 6rem;
+}
+
+#table-headers th,
+.row-text-input,
+.row-select-gender,
+.row-select-position,
+.row-tel-input,
+.row-number-input,
+.row-date-added {
+  padding: 0 0.5rem;
+  height: 2rem;
+  min-width: 4rem;
+}
+
+.row-text-input input,
+.row-number-input input,
+.row-tel-input input,
+.row-select-position select,
+.row-select-gender select {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  outline: none;
 }
 
 .row-select-position select, .row-select-gender select {
   cursor: pointer;
+  text-align: center;
+  text-align-last: center;
 }
 
-.row-date-added {
-  text-align: center!important;
-  cursor: help;
+.row-checkbox-input {
+  text-align: center;
 }
 
 .row-checkbox-input input {
+  width: 1rem;
+  margin: 0;
   cursor: pointer;
+}
+
+.row-number-input input {
+  text-align: center;
+}
+
+.row-date-added {
+  text-align: center;
+  cursor: help;
+  font-size: 0.9rem;
 }
 
 .hidden {
